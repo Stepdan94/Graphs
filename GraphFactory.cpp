@@ -82,23 +82,23 @@ GraphData GraphFactory::GenerateGraphData(const GenerateData& genData)
 	int start = genData.start;
 	int edgeCount = (genData.edgeCount == EdgeCount::Sparse) ? int(0.005 * n) : n / 2;
 
-	srand(time(NULL)); // сИдим
+	srand(time(NULL)); // СЃРРґРёРј
 
 	iMatrix adjMat;
 	std::vector<std::vector<int>>(n, std::vector<int>(n, 0)).swap(adjMat);
 
 	std::vector<int> path;
-	// Генерируем пути от точки старта до i
+	// Р“РµРЅРµСЂРёСЂСѓРµРј РїСѓС‚Рё РѕС‚ С‚РѕС‡РєРё СЃС‚Р°СЂС‚Р° РґРѕ i
 	for (size_t i = 0; i < n; ++i)
 	{
 		if (i == start) continue;
 
-		size_t length = rand() % edgeCount + 2; // Длина нового пути
+		size_t length = rand() % edgeCount + 2; // Р”Р»РёРЅР° РЅРѕРІРѕРіРѕ РїСѓС‚Рё
 		std::vector<int>(length, -1).swap(path);
 		path[0] = start;
 		for (size_t j = 1; j < length; ++j)
 		{
-			// Генерим новую точку пути
+			// Р“РµРЅРµСЂРёРј РЅРѕРІСѓСЋ С‚РѕС‡РєСѓ РїСѓС‚Рё
 			int point;
 			do {
 				point = rand() % n;
@@ -106,8 +106,8 @@ GraphData GraphFactory::GenerateGraphData(const GenerateData& genData)
 			path[j] = point;
 		}
 
-		// Заполняем матрицу смежности согласно пути
-		// Данные могут переписываться, т.к. значение матрицы - вес ребра, они случайны
+		// Р—Р°РїРѕР»РЅСЏРµРј РјР°С‚СЂРёС†Сѓ СЃРјРµР¶РЅРѕСЃС‚Рё СЃРѕРіР»Р°СЃРЅРѕ РїСѓС‚Рё
+		// Р”Р°РЅРЅС‹Рµ РјРѕРіСѓС‚ РїРµСЂРµРїРёСЃС‹РІР°С‚СЊСЃСЏ, С‚.Рє. Р·РЅР°С‡РµРЅРёРµ РјР°С‚СЂРёС†С‹ - РІРµСЃ СЂРµР±СЂР°, РѕРЅРё СЃР»СѓС‡Р°Р№РЅС‹
 		for (size_t j = 0; j < path.size() - 1; ++j)
 			adjMat[path[j]][path[j + 1]] = rand() % 10 + 1;
 	}

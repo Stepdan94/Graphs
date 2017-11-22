@@ -17,13 +17,13 @@ public:
 	GraphData GetData() const override;
 
 protected:
-	size_t m_n;                    // Общее число вершин
-	size_t m_start;                // Стартовая позиция
-	std::vector<size_t> m_lengths; // Вектор длин
-	std::vector<size_t> m_parents; // Вектор предков (для восстановления пути)
-	std::vector<bool> m_isMarked;  // Вектор флагов (помечена вершина или нет) P.S. Да-да, вектор bool =)
-	iMatrix m_adjMat;              // Матрица смежности. Значение элемента - вес ребра.
-	iMatrix m_paths;               // Итоговые пути до вершин
+	size_t m_n;                    // РћР±С‰РµРµ С‡РёСЃР»Рѕ РІРµСЂС€РёРЅ
+	size_t m_start;                // РЎС‚Р°СЂС‚РѕРІР°СЏ РїРѕР·РёС†РёСЏ
+	std::vector<size_t> m_lengths; // Р’РµРєС‚РѕСЂ РґР»РёРЅ
+	std::vector<size_t> m_parents; // Р’РµРєС‚РѕСЂ РїСЂРµРґРєРѕРІ (РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїСѓС‚Рё)
+	std::vector<bool> m_isMarked;  // Р’РµРєС‚РѕСЂ С„Р»Р°РіРѕРІ (РїРѕРјРµС‡РµРЅР° РІРµСЂС€РёРЅР° РёР»Рё РЅРµС‚) P.S. Р”Р°-РґР°, РІРµРєС‚РѕСЂ bool =)
+	iMatrix m_adjMat;              // РњР°С‚СЂРёС†Р° СЃРјРµР¶РЅРѕСЃС‚Рё. Р—РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° - РІРµСЃ СЂРµР±СЂР°.
+	iMatrix m_paths;               // РС‚РѕРіРѕРІС‹Рµ РїСѓС‚Рё РґРѕ РІРµСЂС€РёРЅ
 
-	time_t m_startTime, m_endTime; // Временные засечки
+	time_t m_startTime, m_endTime; // Р’СЂРµРјРµРЅРЅС‹Рµ Р·Р°СЃРµС‡РєРё
 };

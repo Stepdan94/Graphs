@@ -13,7 +13,7 @@ const auto HeapComparePredicat = [](const HeapNode& node1, const HeapNode& node2
 StdHeapDijkstra::StdHeapDijkstra(const std::string & filename)
 	: BaseGraph(filename)
 {
-	// Создаем кучу
+	// РЎРѕР·РґР°РµРј РєСѓС‡Сѓ
 	m_heap.reserve(m_n);
 	for (size_t i = 0; i < m_n; ++i)
 		m_heap.push_back({ i, m_lengths[i] });
@@ -25,7 +25,7 @@ StdHeapDijkstra::StdHeapDijkstra(const std::string & filename)
 StdHeapDijkstra::StdHeapDijkstra(const GraphData& data)
 	: BaseGraph(data)
 {
-	// Создаем кучу
+	// РЎРѕР·РґР°РµРј РєСѓС‡Сѓ
 	m_heap.reserve(m_n);
 	for (size_t i = 0; i < m_n; ++i)
 		m_heap.push_back({ i, m_lengths[i] });
@@ -37,7 +37,7 @@ StdHeapDijkstra::StdHeapDijkstra(const GraphData& data)
 //StdHeapDijkstra::StdHeapDijkstra(const StdHeapDijkstra& data)
 //	: BaseGraph(data)
 //{
-//	// Создаем кучу
+//	// РЎРѕР·РґР°РµРј РєСѓС‡Сѓ
 //	m_heap.reserve(m_n);
 //	for (size_t i = 0; i < m_n; ++i)
 //		m_heap.push_back({ i, m_lengths[i] });
@@ -52,17 +52,17 @@ void StdHeapDijkstra::Solve()
 
 	for (size_t i = 0; i < m_n; ++i)
 	{
-		// Вершина с наименьшей длиной среди не помеченных.
+		// Р’РµСЂС€РёРЅР° СЃ РЅР°РёРјРµРЅСЊС€РµР№ РґР»РёРЅРѕР№ СЃСЂРµРґРё РЅРµ РїРѕРјРµС‡РµРЅРЅС‹С….
 		const auto minElement = m_heap.front();
 		std::pop_heap(m_heap.begin(), m_heap.end(), HeapComparePredicat);
 		m_heap.pop_back();
 
 		m_lengths[minElement.first] = minElement.second;
 
-		// Если расстояние до нее - INT_MAX, значит вершина не достижима из m_start
-		// и эту итерацию можно останавливать
+		// Р•СЃР»Рё СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РЅРµРµ - INT_MAX, Р·РЅР°С‡РёС‚ РІРµСЂС€РёРЅР° РЅРµ РґРѕСЃС‚РёР¶РёРјР° РёР· m_start
+		// Рё СЌС‚Сѓ РёС‚РµСЂР°С†РёСЋ РјРѕР¶РЅРѕ РѕСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ
 		if (minElement.second == INT_MAX) continue;
-		// Просматриваем все ребра, начинающиеся из minIndex
+		// РџСЂРѕСЃРјР°С‚СЂРёРІР°РµРј РІСЃРµ СЂРµР±СЂР°, РЅР°С‡РёРЅР°СЋС‰РёРµСЃСЏ РёР· minIndex
 		for (size_t j = 0; j < m_heap.size(); ++j)
 		{
 			const auto ih = m_heap[j].first;
@@ -70,7 +70,7 @@ void StdHeapDijkstra::Solve()
 			if (m_adjMat[ie][ih] > 0)
 			{
 				const auto min = std::min(m_heap[j].second, minElement.second + m_adjMat[ie][ih]);
-				// При успешной релаксации записываем предка
+				// РџСЂРё СѓСЃРїРµС€РЅРѕР№ СЂРµР»Р°РєСЃР°С†РёРё Р·Р°РїРёСЃС‹РІР°РµРј РїСЂРµРґРєР°
 				if (m_heap[j].second != min)
 				{
 					m_parents[ih] = ie;
@@ -83,7 +83,7 @@ void StdHeapDijkstra::Solve()
 
 	m_endTime = clock();
 
-	// Формируем итоговые пути
+	// Р¤РѕСЂРјРёСЂСѓРµРј РёС‚РѕРіРѕРІС‹Рµ РїСѓС‚Рё
 	m_paths.resize(m_n);
 	for (size_t pntTo = 0; pntTo < m_n; ++pntTo)
 	{

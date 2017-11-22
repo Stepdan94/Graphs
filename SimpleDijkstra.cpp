@@ -1,8 +1,8 @@
 #include "SimpleDijkstra.h"
 
 /*
-	Если алгоритм Дейкстры в методичке непонятен,
-	то можно почитать здесь: http://e-maxx.ru/algo/dijkstra
+	Р•СЃР»Рё Р°Р»РіРѕСЂРёС‚Рј Р”РµР№РєСЃС‚СЂС‹ РІ РјРµС‚РѕРґРёС‡РєРµ РЅРµРїРѕРЅСЏС‚РµРЅ,
+	С‚Рѕ РјРѕР¶РЅРѕ РїРѕС‡РёС‚Р°С‚СЊ Р·РґРµСЃСЊ: http://e-maxx.ru/algo/dijkstra
 */
 
 SimpleDijkstra::SimpleDijkstra(const std::string& filename)
@@ -26,7 +26,7 @@ void SimpleDijkstra::Solve()
 
 	for (size_t i = 0; i < m_n; ++i)
 	{
-		// Вершина с наименьшей длиной среди не помеченных.
+		// Р’РµСЂС€РёРЅР° СЃ РЅР°РёРјРµРЅСЊС€РµР№ РґР»РёРЅРѕР№ СЃСЂРµРґРё РЅРµ РїРѕРјРµС‡РµРЅРЅС‹С….
 		size_t minLength = INT_MAX;
 		size_t minIndex;
 		for (size_t j = 0; j < m_n; ++j)
@@ -37,18 +37,18 @@ void SimpleDijkstra::Solve()
 				minLength = m_lengths[j];
 			}
 		}
-		// Помечаем найденную
+		// РџРѕРјРµС‡Р°РµРј РЅР°Р№РґРµРЅРЅСѓСЋ
 		m_isMarked[minIndex] = true;
-		// Если расстояние до нее - INT_MAX, значит вершина не достижима из m_start
-		// и эту итерацию можно останавливать
+		// Р•СЃР»Рё СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РЅРµРµ - INT_MAX, Р·РЅР°С‡РёС‚ РІРµСЂС€РёРЅР° РЅРµ РґРѕСЃС‚РёР¶РёРјР° РёР· m_start
+		// Рё СЌС‚Сѓ РёС‚РµСЂР°С†РёСЋ РјРѕР¶РЅРѕ РѕСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ
 		if (m_lengths[minIndex] == INT_MAX) continue;
-		// Просматриваем все ребра, начинающиеся из minIndex
+		// РџСЂРѕСЃРјР°С‚СЂРёРІР°РµРј РІСЃРµ СЂРµР±СЂР°, РЅР°С‡РёРЅР°СЋС‰РёРµСЃСЏ РёР· minIndex
 		for (size_t j = 0; j < m_n; ++j)
 		{
 			if (m_adjMat[minIndex][j] > 0)
 			{
 				const auto min = std::min(m_lengths[j], m_lengths[minIndex] + m_adjMat[minIndex][j]);
-				// При успешной релаксации записываем предка
+				// РџСЂРё СѓСЃРїРµС€РЅРѕР№ СЂРµР»Р°РєСЃР°С†РёРё Р·Р°РїРёСЃС‹РІР°РµРј РїСЂРµРґРєР°
 				if (m_lengths[j] != min)
 				{
 					m_parents[j] = minIndex;
@@ -60,7 +60,7 @@ void SimpleDijkstra::Solve()
 
 	m_endTime = clock();
 
-	// Формируем итоговые пути
+	// Р¤РѕСЂРјРёСЂСѓРµРј РёС‚РѕРіРѕРІС‹Рµ РїСѓС‚Рё
 	m_paths.resize(m_n);
 	for (size_t pntTo = 0; pntTo < m_n; ++pntTo)
 	{

@@ -4,8 +4,8 @@
 #include <iostream>
 
 /*
-	Алгоритм Прима: http://www.e-maxx-ru.1gb.ru/algo/mst_prim
-	Случай разреженных графов.
+	РђР»РіРѕСЂРёС‚Рј РџСЂРёРјР°: http://www.e-maxx-ru.1gb.ru/algo/mst_prim
+	РЎР»СѓС‡Р°Р№ СЂР°Р·СЂРµР¶РµРЅРЅС‹С… РіСЂР°С„РѕРІ.
 */
 
 SimplePrim::SimplePrim(const std::string& filename)
@@ -24,7 +24,7 @@ void SimplePrim::Solve()
 
 	for (size_t i = 0; i < m_n; ++i)
 	{
-		// Вершина с наименьшей длиной среди не помеченных.
+		// Р’РµСЂС€РёРЅР° СЃ РЅР°РёРјРµРЅСЊС€РµР№ РґР»РёРЅРѕР№ СЃСЂРµРґРё РЅРµ РїРѕРјРµС‡РµРЅРЅС‹С….
 		size_t minLength = INT_MAX;
 		size_t minIndex;
 		for (size_t j = 0; j < m_n; ++j)
@@ -38,15 +38,15 @@ void SimplePrim::Solve()
 
 		if (m_lengths[minIndex] == INT_MAX)
 		{
-			assert(0 && "Алгоритм Прима: нет минимального остова!");
-			std::cout << "Алгоритм Прима: нет минимального остова!" << std::endl;
+			assert(0 && "РђР»РіРѕСЂРёС‚Рј РџСЂРёРјР°: РЅРµС‚ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР°!");
+			std::cout << "РђР»РіРѕСЂРёС‚Рј РџСЂРёРјР°: РЅРµС‚ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР°!" << std::endl;
 			return;
 		}
 
-		// Помечаем найденную
+		// РџРѕРјРµС‡Р°РµРј РЅР°Р№РґРµРЅРЅСѓСЋ
 		m_isMarked[minIndex] = true;
 
-		// Просматриваем все ребра, начинающиеся из minIndex
+		// РџСЂРѕСЃРјР°С‚СЂРёРІР°РµРј РІСЃРµ СЂРµР±СЂР°, РЅР°С‡РёРЅР°СЋС‰РёРµСЃСЏ РёР· minIndex
 		for (size_t j = 0; j < m_n; ++j)
 		{
 			if (m_adjMat[minIndex][j] > 0)
@@ -62,7 +62,7 @@ void SimplePrim::Solve()
 
 	m_endTime = clock();
 
-	// Формируем итоговые пути
+	// Р¤РѕСЂРјРёСЂСѓРµРј РёС‚РѕРіРѕРІС‹Рµ РїСѓС‚Рё
 	m_paths.resize(m_n);
 	for (size_t pntTo = 0; pntTo < m_n; ++pntTo)
 	{
